@@ -21,6 +21,25 @@ function addItems(e) {
         alert('Please add an Item!');
         return;
     }
+
+    //check for editmode
+    if (isEditMode) {
+        const itemToEdit = document.querySelector('.edit-mode');
+        removeItemFromStorage(itemToEdit.textContent);
+        itemToEdit.classList.remove('.edit-mode');
+        itemToEdit.remove();
+        isEditMode = false;
+        if (checkIfItemExists(inputValue)) {
+            alert(`${inputValue} already exists`);
+            return;
+        }
+    }
+    else{
+        if (checkIfItemExists(inputValue)) {
+            alert(`${inputValue} already exists`);
+            return;
+        }
+    }
     
     addItemToDOM(inputValue);
     //add item to local storage
@@ -80,6 +99,11 @@ function onClickItems(e) {
     }
 }
 
+function checkIfItemExists(item) {
+    const itemsFromStorage = getItemsFromStorage();
+    return itemsFromStorage.includes(item);
+}
+
 function setItemToedit(item) {
     isEditMode = true;
     itemList.querySelectorAll('li').forEach((i) => i.classList.remove('edit-mode'));
@@ -123,6 +147,7 @@ function clearItems() {
 }
 
 function checkUi() {
+    itemInput.value = '';
     const items = itemList.querySelectorAll('li');
     if (items.length === 0) {
         clearBtn.style.display = 'none';
@@ -132,10 +157,14 @@ function checkUi() {
         clearBtn.style.display = 'block';
         itemFilter.style.display = 'block';
     }
-}
-checkUi();
 
-//function to filter items
+    formBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Add Item';
+    formBtn.style.backgroundColor = '#416D19';
+    isEditMode = false;
+
+}
+
+//function to filter items  
 function filterItems(e) {
     const items = itemList.querySelectorAll('li');
     const inputText = e.target.value.toLowerCase();

@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
-*{
+*,
+*::after,
+*::before{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -16,6 +18,11 @@ body{
     padding: 20px;
     color: #9BCF53;
 }
+
+.edit-mode{
+    color: #bdcea4;
+}
+
 header {
     display: flex;
     justify-content: flex-start;
@@ -51,6 +58,10 @@ header h1 {
     color: #F1F5A8;
     cursor: pointer;
 }
+.form-control button:hover{
+    background-color: #2e530c;
+}
+
 .form-control button i{
     margin-right: 6px;
 }
@@ -74,22 +85,29 @@ header h1 {
     color: #9BCF53;
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 .filter input{
-    margin: 10px 0;
-
-    border: none;
-    background-color: transparent;
-    font-size: 18px;
-    border-bottom: 1px solid #e2e4bc;
+    margin-top: 20px;
     width: 100%;
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #e2e4bc;
+    background: transparent;
+    outline: none;
 }
 .clear-btn{
     font-size: 18px;
     width: 100%;
     margin: 10px 0;
     border: 1px solid #e2e4bc;
-    color: #9BCF53;
+    color: #F1F5A8;
+    background-color: #416D19;
+}
+.clear-btn:hover{
+    background-color: #2e530c;
 }
 @media (max-width: 500px) {
     .item-list li {
